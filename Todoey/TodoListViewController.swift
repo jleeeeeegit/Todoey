@@ -10,7 +10,9 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
     
-    let itemArray = ["Find Mike","Buy Eggos","Destroy Demogoron"]
+    // let itemArray = ["Find Mike","Buy Eggos","Destroy Demogoron"]
+    // Change above line from immutable(Constant) to variable mutable by using var
+       var itemArray = ["Find Mike","Buy Eggos","Destroy Demogoron"]
     
 
     override func viewDidLoad() {
@@ -55,6 +57,42 @@ class TodoListViewController: UITableViewController {
     }
 
     
-
+    //Mark Add New Items
+    
+    @IBAction func AddButtonPressed(_ sender: UIBarButtonItem) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Add a New To Do list", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add Item", style: .default) {
+            
+            (action) in
+             //What will happen once the user clicks add item button on our UIAlert
+            // print("Success: \(textField.text!)")
+            
+            self.itemArray.append(textField.text!)
+            self.tableView.reloadData()
+            
+             }
+        
+        
+        alert.addTextField {
+            
+            (alertTextField) in
+            alertTextField.placeholder = "Create new item"
+            textField = alertTextField
+            print(alertTextField.text!)
+            
+        }
+        
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+        
+        }
+    
+    
+    
 }
 
