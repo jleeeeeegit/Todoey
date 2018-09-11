@@ -14,9 +14,16 @@ class TodoListViewController: UITableViewController {
     // Change above line from immutable(Constant) to variable mutable by using var
        var itemArray = ["Find Mike","Buy Eggos","Destroy Demogoron"]
     
+    let defaults = UserDefaults.standard
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let items = defaults.array(forKey: "ToDoListArray") as? [String] {
+            
+            itemArray = items
+        }
        
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -72,6 +79,7 @@ class TodoListViewController: UITableViewController {
             // print("Success: \(textField.text!)")
             
             self.itemArray.append(textField.text!)
+            self.defaults.setValue(self.itemArray, forKey: "ToDoListArray")
             self.tableView.reloadData()
             
              }
